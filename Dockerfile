@@ -1,16 +1,12 @@
-# Now is 20250609-205110.
+# Now is 20250609-210924.
+FROM python:3.12
 
-# FROM node:lts-alpine@sha256:b2da3316acdc2bec442190a1fe10dc094e7ba4121d029cb32075ff59bb27390a
-# RUN apk add dumb-init
-# ENV NODE_ENV production
-# WORKDIR /usr/src/app
-# COPY --chown=node:node . .
-# RUN npm ci --only=production
-# USER node
-# CMD ["dumb-init", "node", "server.js"]
+ENV PYTHONUNBUFFERED=1
 
-FROM node
-WORKDIR /usr/src/app
-COPY . /usr/src/app
-RUN npm install
-CMD "npm" "start"
+WORKDIR /app
+
+COPY main.py requirements.txt ./
+
+RUN pip install -r requirements.txt
+
+CMD [ "python" , "main.py" ]
