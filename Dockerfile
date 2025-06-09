@@ -3,6 +3,7 @@ RUN apk add dumb-init
 ENV NODE_ENV production
 WORKDIR /usr/src/app
 COPY --chown=node:node . .
-RUN npm ci --only=production
+# RUN npm ci --only=production
+RUN npm install
 USER node
 CMD ["dumb-init", "node", "server.js"]
